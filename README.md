@@ -10,5 +10,5 @@ Requirements
 ===========
 This script requires the Requests library Requests: HTTP for Humans
 
-http://docs.python-requests.org/en/latest/
-https://github.com/kennethreitz/requests
+* http://docs.python-requests.org/en/latest/
+* https://github.com/kennethreitz/requests
