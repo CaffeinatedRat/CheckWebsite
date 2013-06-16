@@ -43,7 +43,8 @@ class checkWebsiteThread (threading.Thread):
 		while self.isAlive:
 			self.checkWebsite(self.websiteName, self.websiteUrl)
 			time.sleep(self.sleepTime)
-			print 'Site checking for site {0} has stopped.\n'.format(self.websiteUrl)
+		
+		print 'Site checking for site {0} has stopped.\n'.format(self.websiteUrl)
 
 	#Stops the threads internal loop.
 	def stop(self):
