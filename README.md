@@ -6,6 +6,11 @@ Just a simple python script to peform a head request on any website, and will se
 * Website: [http://www.caffeinatedrat.com](http://www.caffeinatedrat.com)
 * Bugs/Suggestions: CaffeinatedRat at gmail dot com
 
+Compilation
+===========
+
+This script was generated using Python 2.7.4.
+
 Requirements
 ===========
 This script requires the Requests library Requests: HTTP for Humans
