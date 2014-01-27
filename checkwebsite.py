@@ -64,9 +64,8 @@ class checkWebsiteThread(threading.Thread):
 		#Attempt to perform a head request on the website with time-out
 		#in seconds based on the timeOutVal
 		try:
-			#r = requests.head(websiteUrl, timeout=timeOutVal)
-			#r.raise_for_status()
-			print('rquest')
+			r = requests.head(websiteUrl, timeout=timeOutVal)
+			r.raise_for_status()
 		except:
 			e = sys.exc_info()
 			errorMessage = str(e[0]) + '\r\n' + str(e[1])
