@@ -1,13 +1,16 @@
-#External library.
-#http://docs.python-requests.org/en/latest/
-import requests
+#Built on Python 2.7.6
+#Version 1.0
 
-#Internal libraries.
+#Internal modules
 import sys
 import smtplib
 import datetime
 import time
 import threading
+
+#External modules
+#http://docs.python-requests.org/en/latest/
+import requests
 
 #Email Login Settings
 smtpLoginId = 'login'
@@ -41,20 +44,32 @@ class checkWebsiteThread(threading.Thread):
 			self.sleepTime = 300
 		else:
 			self.sleepTime = sleepTime
+			
+		#Create a thread condition to improve thread handling.
+		self.condition = threading.Condition()			
 
 	#Run method invoked when the thread starts.
 	def run(self):
 		print('>>Beginning site checking for site {0}\n').format(self.websiteUrl)
+		self.condition.acquire()
 		while self.isAlive:
 			if self.checkWebsite(self.websiteName, self.websiteUrl):
-				time.sleep(self.sleepTime)
+				self.condition.wait(self.sleepTime)
 			else:
 				self.isAlive = False
+		self.condition.release()
 		print('>>Site checking for site {0} has stopped.\n').format(self.websiteUrl)
 
 	#Stops the threads internal loop.
 	def stop(self):
 		self.isAlive = False
+		try:
+			self.condition.acquire()
+			self.condition.notifyAll()
+			self.condition.release()
+		except:
+			e = sys.exc_info()
+			print(str(e[0]) + '\r\n' + str(e[1]))		
 
 	#Perform the actual check website logic.
 	def checkWebsite(self, websiteName, websiteUrl):
